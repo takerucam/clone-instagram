@@ -1,5 +1,5 @@
 import { Text } from "react-native";
 
-export default function Tabs() {
-  return <Text>Feeds</Text>;
+export default function CreatePost() {
+  return <Text>Create post</Text>;
 }
