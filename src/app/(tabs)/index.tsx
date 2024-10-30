@@ -4,13 +4,16 @@ import PostListItem from "~/src/components/PostListItem";
 
 export default function FeedScreen() {
   return (
-    <View className="bg-white">
-      <FlatList
-        data={posts}
-        contentContainerStyle={{ gap: 10 }}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item }) => <PostListItem post={item} />}
-      />
-    </View>
+    <FlatList
+      data={posts}
+      contentContainerStyle={{
+        gap: 10,
+        maxWidth: 512,
+        width: "100%",
+        alignItems: "center",
+      }}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => <PostListItem post={item} />}
+    />
   );
 }
