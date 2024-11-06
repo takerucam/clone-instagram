@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Image, Pressable, Text, TextInput, View } from "react-native";
+import { Image, Text, TextInput, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import Button from "~/src/components/Button";
+import { uploadImage } from "~/src/lib/cloudinary";
 
 export default function CreatePost() {
   const [caption, setCaption] = useState<string>("");
@@ -18,14 +19,21 @@ export default function CreatePost() {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0.5,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
+  };
+
+  const createPost = async () => {
+    if (!image) {
+      return;
+    }
+    // cloudinaryへアップロード
+    const res = await uploadImage(image);
+    console.log(res);
   };
 
   return (
@@ -53,7 +61,7 @@ export default function CreatePost() {
       />
 
       <View className="mt-auto w-full">
-        <Button title="Share" />
+        <Button title="Share" onPress={createPost} />
       </View>
     </View>
   );
